@@ -1,0 +1,93 @@
+{
+  "name": "@bcbogdan/api-contracts",
+  "version": "0.1.0",
+  "description": "Typed API contracts, fetch clients, optional NestJS integration and portable rate limiting.",
+  "private": true,
+  "type": "commonjs",
+  "main": "./dist/contract.js",
+  "types": "./dist/contract.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/contract.d.ts",
+      "default": "./dist/contract.js"
+    },
+    "./shared": {
+      "types": "./dist/contract.d.ts",
+      "default": "./dist/contract.js"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "default": "./dist/client.js"
+    },
+    "./nestjs": {
+      "types": "./dist/server.d.ts",
+      "default": "./dist/server.js"
+    },
+    "./rate-limit/*": {
+      "types": "./dist/rate-limit/*.d.ts",
+      "default": "./dist/rate-limit/*.js"
+    }
+  },
+  "files": [
+    "dist/**",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcbogdan/api-contracts.git"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "bun@1.4.4",
+  "scripts": {
+    "build": "bun run scripts/clean.ts && tsc -p tsconfig.json && bun run scripts/copy-assets.ts",
+    "test:types": "tsc -p tsconfig.test.json",
+    "test": "bun run test:types && vitest run",
+    "fmt": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:public": "bun run scripts/check-public.ts",
+    "prepack": "bun run build"
+  },
+  "dependencies": {
+    "zod": "^4.6.7",
+    "@opentelemetry/api": "^1.9.0"
+  },
+  "peerDependencies": {
+    "@nestjs/common": "^11.1.12",
+    "@nestjs/core": "^11.1.12",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "redis": "^4.7.0"
+  },
+  "peerDependenciesMeta": {
+    "@nestjs/common": {
+      "optional": true
+    },
+    "@nestjs/core": {
+      "optional": true
+    },
+    "reflect-metadata": {
+      "optional": true
+    },
+    "rxjs": {
+      "optional": true
+    },
+    "redis": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@nestjs/common": "^11.1.12",
+    "@nestjs/core": "^11.1.12",
+    "@nestjs/platform-express": "^11.2.7",
+    "@nestjs/testing": "^11.1.12",
+    "@types/node": "^22.0.0",
+    "prettier": "^3.6.2",
+    "redis": "^4.7.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "typescript": "5.9.3",
+    "vitest": "^4.1.0"
+  }
+}
